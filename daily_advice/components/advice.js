@@ -25,11 +25,11 @@ const Advice = () => {
       
       <Text>Conselho do dia! 🎉</Text>
 
-      {Array.isArray(advice) && advice.length > 0 ? (
-      advice.map((item) => <Text key={item.id}>{item.slip.advice}</Text>)
-    ) : (
-      <Text>Nenhum conselho disponível.</Text>
-    )}
+      {advice.length > 0 ? (
+        advice.map((item) => <Text key={item.id}>{item.slip.advice}</Text>)
+      ) : (
+        <Text>Nenhum conselho disponível.</Text>
+      )}
     </View>
   );
 };
