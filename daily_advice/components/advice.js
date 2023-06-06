@@ -1,25 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {Alert, Text, View} from 'react-native';
 import api from '../services/api';
 
 const Advice = () => {
 
-  const [advice, setAdvice] = useState(null);
+  const [advice, setAdvice] = useState([]);
 
-  async function handleSearch(){
-    try {
-      const {status, data} = await api.get();
+  useEffect(() =>{
+
+    api.get().then(({data}) =>{
+      setAdvice(data);
       console.log(data);
+    })
 
-      if(status != 200 || data.console.error()){
-        Alert.alert('Buscar', 'Conselho indisponível.')
-      }else{
-        setAdvice(data);
-      }
-    }catch{
-      Alert.alert('Buscar', 'Conselho indisponível.')
-    }
-  };
+  }, [])
 
   return (
     <View
@@ -30,6 +24,12 @@ const Advice = () => {
       }}>
       
       <Text>Conselho do dia! 🎉</Text>
+
+      {Array.isArray(advice) && advice.length > 0 ? (
+      advice.map((item) => <Text key={item.id}>{item.slip.advice}</Text>)
+    ) : (
+      <Text>Nenhum conselho disponível.</Text>
+    )}
     </View>
   );
 };
