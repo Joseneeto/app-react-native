@@ -8,9 +8,6 @@ export default function App() {
     <View style={styles.container}>
 
       <Advice />
-      <Text>Conselhos diários!</Text>
-      <Text>Conselhos diários!</Text>
-
       <StatusBar style="auto" />
     </View>
   );
